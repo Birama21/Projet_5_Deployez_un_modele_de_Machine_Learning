@@ -23,6 +23,7 @@ Le projet inclut :
 8. [Pipeline CI/CD](#pipeline-cicd)  
 9. [Contribuer](#contribuer)  
 10. [Licence](#licence)  
+11. [Conventions Git / Branches](#conventions-git--branches)
 
 ---
 
@@ -32,11 +33,14 @@ Le projet inclut :
 - Git  
 - Virtualenv ou Conda 
 
----
+## Installation 
+- git clone git@github.com:Birama21 Projet_5_Deployez_un_modele_de_Machine_Learning.git
+- use ssh key 
 
-## Installation
+## Conventions Git / Branches
 
-1. **Cloner le dépôt** :
-```bash
-git clone git@github.com:Birama21 Projet_5_Deployez_un_modele_de_Machine_Learning.git
-Use a password-protected SSH key.
+- main : branche principale stable,
+- feature/<nom-fonctionnalité> : nouvelle fonctionnalité,
+- bugfix/<nom-du-bug> : correction de bug,
+- hotfix/<nom-du-hotfix> : corrections urgentes,
+- release/<version> : pour préparer une version à publier
