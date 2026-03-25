@@ -19,5 +19,6 @@ dependencies = [
     "fastapi",
     "uvicorn",
     "pytest",
-    "pytest-cov"
+    "pytest-cov",
+    "python-multipart"
 ]

@@ -1,8 +1,9 @@
 # main.py
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
 from app.schemas import PredictionInput
 from app.model import load_model
 import pandas as pd
+import io
 
 # =====================
 # Initialisation de l'API
@@ -15,7 +16,7 @@ app = FastAPI(title="API Prédiction Employee Turnover")
 model = load_model()
 
 # =====================
-# Fonction de prédiction
+# Fonction de prédiction pour une ligne
 # =====================
 def predict(model, data: PredictionInput):
     # Convertir les données Pydantic en DataFrame
@@ -31,3 +32,22 @@ def predict(model, data: PredictionInput):
 def make_prediction(data: PredictionInput):
     pred = predict(model, data)
     return {"prediction": pred}
+
+# =====================
+# Endpoint /batch_predict pour tout un CSV
+# =====================
+@app.post("/batch_predict")
+def batch_predict(file: UploadFile = File(...)):
+    """
+    Endpoint pour prédire toutes les lignes d'un CSV envoyé.
+    - file: fichier CSV (sans la colonne cible)
+    """
+    # Lire le CSV en DataFrame
+    contents = file.file.read()
+    df = pd.read_csv(io.StringIO(contents.decode('utf-8')))
+    
+    # Prédictions
+    preds = model.predict(df)
+    
+    # Retourner la liste des prédictions en JSON
+    return {"predictions": preds.tolist()}
