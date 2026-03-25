@@ -1,7 +1,16 @@
+import joblib
+import pandas as pd
+from pathlib import Path
+
+MODEL_PATH = Path("models/model.pkl")
+
 def load_model():
-    # plus tard : chargement du modèle (pickle/joblib)
-    return None
+    return joblib.load(MODEL_PATH)
 
 def predict(model, data):
-    # prédiction simulée pour l’instant
-    return 0
+    # convertir en DataFrame avec noms de colonnes
+    df = pd.DataFrame([data.dict()])
+    
+    prediction = model.predict(df)
+    
+    return int(prediction[0])
