@@ -44,8 +44,11 @@ def batch_predict(file: UploadFile = File(...)):
     """
     # Lire le CSV en DataFrame
     contents = file.file.read()
-    df = pd.read_csv(io.StringIO(contents.decode('utf-8')))
-    
+    df = pd.read_csv(io.StringIO(contents.decode('utf-8-sig')))
+        # Supprimer la colonne target si elle existe
+    if "a_quitte_l_entreprise" in df.columns:
+        df = df.drop(columns=["a_quitte_l_entreprise"])
+
     # Prédictions
     preds = model.predict(df)
     
