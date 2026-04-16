@@ -20,5 +20,7 @@ dependencies = [
     "uvicorn",
     "pytest",
     "pytest-cov",
-    "python-multipart"
+    "python-multipart",
+    "sqlalchemy>=2.0",
+    "psycopg2-binary"
 ]
