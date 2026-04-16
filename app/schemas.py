@@ -11,7 +11,7 @@ class PredictionInput(BaseModel):
     annees_dans_le_poste_actuel: int
     nombre_participation_pee: int
     nb_formations_suivies: int
-    distance_domicile_travail: int
+    distance_domicile_travail: float 
     niveau_education: int
     domaine_etude: str
     frequence_deplacement: str
@@ -24,7 +24,7 @@ class PredictionInput(BaseModel):
     satisfaction_employee_equipe: int
     satisfaction_employee_equilibre_pro_perso: int
     note_evaluation_actuelle: int
-    heure_supplementaires: int
+    heure_supplementaires: float 
     augementation_salaire_precedente: float
     Aug_net: float
     Rat_Rev_Aentr: float
