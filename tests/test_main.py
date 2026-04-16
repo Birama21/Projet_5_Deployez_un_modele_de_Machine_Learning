@@ -1,20 +1,27 @@
 import pytest
 from fastapi.testclient import TestClient
+import app.main as main_module
 
 # =========================
-# 🎭 MOCK log_prediction AVANT import app
+# 🎭 Fake model
 # =========================
-import app.main as main_module
+class FakeModel:
+    def predict(self, X):
+        return [1]
+
+
+# =========================
+# 🔧 FIX GLOBAL (IMPORTANT)
+# =========================
+main_module.model = FakeModel()
+
 
 def fake_log_prediction(input_data, prediction):
     return None
 
+
 main_module.log_prediction = fake_log_prediction
 
-
-# =========================
-# 🚀 client FastAPI
-# =========================
 client = TestClient(main_module.app)
 
 
@@ -66,9 +73,7 @@ def test_batch_predict_endpoint():
 30,1,Single,Engineer,2,5,3,2,1,3,10.5,3,IT,Rarely,1,2,4,3,2,4,4,3,4,5.0,2.5,1000.0,0.2
 """
 
-    files = {
-        "file": ("test.csv", csv_data, "text/csv")
-    }
+    files = {"file": ("test.csv", csv_data, "text/csv")}
 
     response = client.post("/batch_predict", files=files)
 
