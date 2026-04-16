@@ -1,10 +1,7 @@
 import pytest
+from pydantic import ValidationError
 from app.schemas import PredictionInput
 
-
-# =========================
-# ✅ Test avec données valides
-# =========================
 def test_prediction_input_valid():
     data = {
         "age": 30,
@@ -42,29 +39,24 @@ def test_prediction_input_valid():
     assert obj.poste == "Engineer"
 
 
-# =========================
-# ❌ Test champ manquant
-# =========================
 def test_prediction_input_missing_field():
     data = {
         "age": 30
     }
 
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         PredictionInput(**data)
 
 
-# =========================
-# ❌ Test mauvais type
-# =========================
 def test_prediction_input_wrong_type():
     data = {
-        "age": "trente",  # ❌ doit être int
+        "age": "trente",
         "genre": 1,
         "statut_marital": "Single",
         "poste": "Engineer",
         "nombre_experiences_precedentes": 2,
         "annee_experience_totale": 5,
+        "annees_dans_l_entreprise": 3,
         "annees_dans_l_entreprise": 3,
         "annees_dans_le_poste_actuel": 2,
         "nombre_participation_pee": 1,
@@ -88,5 +80,5 @@ def test_prediction_input_wrong_type():
         "Rat_Rev_Aentr": 0.2
     }
 
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         PredictionInput(**data)

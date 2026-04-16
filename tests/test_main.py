@@ -1,20 +1,21 @@
 import pytest
 from fastapi.testclient import TestClient
-from app.main import app
-
-client = TestClient(app)
-
 
 # =========================
-# 🎭 MOCK log_prediction
+# 🎭 MOCK log_prediction AVANT import app
 # =========================
+import app.main as main_module
+
 def fake_log_prediction(input_data, prediction):
     return None
 
+main_module.log_prediction = fake_log_prediction
 
-# on remplace la vraie fonction par fake
-import app.main
-app.main.log_prediction = fake_log_prediction
+
+# =========================
+# 🚀 client FastAPI
+# =========================
+client = TestClient(main_module.app)
 
 
 # =========================
@@ -28,7 +29,6 @@ def test_predict_endpoint():
         "poste": "Engineer",
         "nombre_experiences_precedentes": 2,
         "annee_experience_totale": 5,
-        "annees_dans_l_entreprise": 3,
         "annees_dans_l_entreprise": 3,
         "annees_dans_le_poste_actuel": 2,
         "nombre_participation_pee": 1,
@@ -62,8 +62,8 @@ def test_predict_endpoint():
 # 🧪 TEST /batch_predict
 # =========================
 def test_batch_predict_endpoint():
-    csv_data = """age,genre,statut_marital,poste,nombre_experiences_precedentes,annee_experience_totale,annees_dans_l_entreprise,annees_dans_l_entreprise,annees_dans_le_poste_actuel,nombre_participation_pee,nb_formations_suivies,distance_domicile_travail,niveau_education,domaine_etude,frequence_deplacement,annees_depuis_la_derniere_promotion,annes_sous_responsable_actuel,satisfaction_employee_environnement,note_evaluation_precedente,niveau_hierarchique_poste,satisfaction_employee_nature_travail,satisfaction_employee_equipe,satisfaction_employee_equilibre_pro_perso,note_evaluation_actuelle,heure_supplementaires,augementation_salaire_precedente,Aug_net,Rat_Rev_Aentr
-30,1,Single,Engineer,2,5,3,3,2,1,3,10.5,3,IT,Rarely,1,2,4,3,2,4,4,3,4,5.0,2.5,1000.0,0.2
+    csv_data = """age,genre,statut_marital,poste,nombre_experiences_precedentes,annee_experience_totale,annees_dans_l_entreprise,annees_dans_le_poste_actuel,nombre_participation_pee,nb_formations_suivies,distance_domicile_travail,niveau_education,domaine_etude,frequence_deplacement,annees_depuis_la_derniere_promotion,annes_sous_responsable_actuel,satisfaction_employee_environnement,note_evaluation_precedente,niveau_hierarchique_poste,satisfaction_employee_nature_travail,satisfaction_employee_equipe,satisfaction_employee_equilibre_pro_perso,note_evaluation_actuelle,heure_supplementaires,augementation_salaire_precedente,Aug_net,Rat_Rev_Aentr
+30,1,Single,Engineer,2,5,3,2,1,3,10.5,3,IT,Rarely,1,2,4,3,2,4,4,3,4,5.0,2.5,1000.0,0.2
 """
 
     files = {
