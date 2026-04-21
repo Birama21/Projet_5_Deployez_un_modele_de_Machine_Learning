@@ -2,7 +2,7 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# dépendances en premier (meilleur cache)
+# dépendances en premier (meilleur cache.)
 COPY requirements.txt .
 
 RUN pip install --no-cache-dir --upgrade pip && \
