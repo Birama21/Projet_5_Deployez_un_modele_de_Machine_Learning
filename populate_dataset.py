@@ -1,4 +1,4 @@
 from app.data_utils import insert_csv_to_db
 
-csv_path = "C:/AI_engineer_training/Projets/Projet_5_Déployez_un_modèle_de_Machine_Learning/Github_Projet_5/Projet_5_Deployez_un_modele_de_Machine_Learning/data/test_data.csv"
+csv_path = "data/test_data.csv"
 insert_csv_to_db(csv_path)
