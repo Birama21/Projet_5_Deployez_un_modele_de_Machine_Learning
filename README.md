@@ -1,46 +1,77 @@
-# Projet_5_D-ployez_un_mod-le_de_Machine_Learning
-deployez un modèle ML
-# Déploiement d’un modèle Machine Learning – Futurisys
+# 🚀 Déploiement d’un modèle Machine Learning – Futurisys
 
-Ce projet a pour objectif de déployer un modèle de Machine Learning en production pour **Futurisys**, une entreprise souhaitant rendre ses modèles opérationnels et accessibles via une API performante.
-
-Le projet inclut :  
-- Une API REST exposant le modèle ML via **FastAPI**.  
-- Tests unitaires et fonctionnels avec **Pytest**.  
-- Gestion de la base de données **PostgreSQL**.  
-- Pipeline **CI/CD** pour automatiser tests et déploiement.
+API de prédiction de turnover des employés basée sur un modèle de Machine Learning, exposée via FastAPI, conteneurisée avec Docker et déployée avec CI/CD (GitHub Actions + Hugging Face Spaces).
 
 ---
 
-## Table des matières
-1. [Prérequis](#prérequis)  
-2. [Installation](#installation)  
-3. [Structure du projet](#structure-du-projet)  
-4. [Utilisation de l’API](#utilisation-de-lapi)  
-5. [Tests](#tests)  
-6. [Déploiement](#déploiement)  
-7. [Base de données](#base-de-données)  
-8. [Pipeline CI/CD](#pipeline-cicd)  
-9. [Contribuer](#contribuer)  
-10. [Licence](#licence)  
-11. [Conventions Git / Branches](#conventions-git--branches)
+## ⚡ Stack technique
+FastAPI · Scikit-learn · Docker · PostgreSQL · Pytest · GitHub Actions · Hugging Face Spaces
 
 ---
 
-## Prérequis
-- Python ≥ 3.12  
-- PostgreSQL ≥ 15  
-- Git  
-- Virtualenv ou Conda 
+## 📦 Installation
 
-## Installation 
-- git clone git@github.com:Birama21 Projet_5_Deployez_un_modele_de_Machine_Learning.git
-- use ssh key 
+git clone git@github.com:Birama21/Projet_5_Deployez_un_modele_de_Machine_Learning.git  
+cd Projet_5_Deployez_un_modele_de_Machine_Learning  
 
-## Conventions Git / Branches
+python -m venv venv  
+source venv/bin/activate (Mac/Linux)  
+venv\Scripts\activate (Windows)  
 
-- main : branche principale stable,
-- feature/<nom-fonctionnalité> : nouvelle fonctionnalité,
-- bugfix/<nom-du-bug> : correction de bug,
-- hotfix/<nom-du-hotfix> : corrections urgentes,
-- release/<version> : pour préparer une version à publier
+pip install -r requirements.txt  
+uvicorn app.main:app --reload  
+
+---
+
+## 🐳 Docker
+
+docker build -t ml-api .  
+docker run -p 7860:7860 ml-api  
+
+---
+
+## 🌐 API
+
+Swagger : http://localhost:7860/docs  
+
+### POST /predict
+{
+  "age": 35,
+  "salaire": 50000,
+  "anciennete": 3
+}
+
+### POST /batch_predict
+Upload CSV → retour liste de prédictions
+
+---
+
+## 🧪 Tests
+
+pytest  
+
+---
+
+## 🗄️ Base de données
+
+PostgreSQL pour log des prédictions (désactivé sur Hugging Face si non disponible)
+
+---
+
+## 🔄 CI/CD
+
+CI : tests automatiques via GitHub Actions à chaque push  
+CD : déploiement automatique sur Hugging Face Spaces  
+
+---
+
+## 🚀 Déploiement
+
+Local : Uvicorn ou Docker  
+Cloud : Hugging Face Spaces (auto deploy via git push)
+
+---
+
+## 📌 Objectif
+
+Déploiement d’un modèle ML en production avec API, tests et automatisation complète CI/CD.
