@@ -24,4 +24,6 @@ dependencies = [
     "sqlalchemy>=2.0",
     "psycopg2-binary",
     "gradio>=6.13.0",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.7.6",
 ]

@@ -1,6 +1,6 @@
 # ML & Code Standards – Projet Futurisys
 
-Ce document définit les standards de développement et d’expérimentation utilisés dans ce projet afin de garantir la qualité, la lisibilité et la reproductibilité du code.
+Ce document définit les standards de développement, d’expérimentation et de déploiement utilisés dans ce projet afin de garantir la qualité, la reproductibilité et la maintenabilité.
 
 ---
 
@@ -9,112 +9,106 @@ Ce document définit les standards de développement et d’expérimentation uti
 ## 📌 Style de code
 - Respect des conventions **PEP8**
 - Indentation : 4 espaces
-- Nommage des variables en `snake_case`
-- Nommage des classes en `CamelCase`
-- Fonctions courtes et explicites
+- Variables en `snake_case`
+- Classes en `CamelCase`
+- Fonctions courtes, claires et avec une seule responsabilité
 
-## 📌 Organisation du code
-Le projet est structuré de manière modulaire :
-
-- `app/` : API FastAPI
-- `models/` : modèles de Machine Learning
+## 📌 Organisation du projet
+- `app/` : API FastAPI (routes + logique métier)
+- `models/` : modèle ML (sauvegarde et chargement)
 - `tests/` : tests unitaires et fonctionnels
-- `data/` : jeux de données (si applicable)
+- `data/` : datasets (optionnel)
 
 ## 📌 Bonnes pratiques
-- Séparer la logique métier de l’API
-- Éviter les fonctions trop longues
-- Documenter les fonctions si nécessaire (docstrings)
-- Réutiliser le code (éviter les duplications)
+- Séparer API et logique Machine Learning
+- Éviter la duplication de code
+- Utiliser des fonctions réutilisables
+- Ajouter des docstrings sur les fonctions importantes
 
 ---
 
 # 🌿 2. Standards Git
 
 ## 📌 Branches
-- `main` : version stable en production
-- `develop` : intégration des fonctionnalités
-- `feature/<nom>` : nouvelles fonctionnalités
-- `bugfix/<nom>` : corrections de bugs
-- `hotfix/<nom>` : corrections urgentes
+- `main` : version stable (production)
+- `feature/*` : nouvelles fonctionnalités
+- `bugfix/*` : corrections de bugs
+- `hotfix/*` : corrections urgentes
 
 ## 📌 Commits
-- Commits clairs et descriptifs
-- Convention recommandée :
-  - `feat:` ajout d’une fonctionnalité
-  - `fix:` correction de bug
-  - `docs:` documentation
-  - `refactor:` amélioration du code sans changement fonctionnel
+Les messages de commit doivent être clairs et explicites.
+
+Convention recommandée :
+- `feat:` ajout de fonctionnalité
+- `fix:` correction de bug
+- `docs:` documentation
+- `refactor:` amélioration du code sans changement fonctionnel
 
 Exemple :
-
+feat: ajout endpoint batch_predict
 
 ---
 
-# 🤖 3. Standards d’expérimentation Machine Learning
+# 🤖 3. Standards Machine Learning
 
-## 📌 Préparation des données
-- Nettoyage des données en amont
-- Séparation des données en :
-  - train
-  - test
+## 📌 Données
+- Nettoyage des données avant entraînement
+- Gestion des valeurs manquantes
 - Encodage des variables catégorielles si nécessaire
 
 ## 📌 Entraînement
-- Utilisation de pipelines reproductibles
-- Fixation des seeds pour reproductibilité
-- Versionnage des datasets si possible
+- Pipeline reproductible
+- Séparation train / test
+- Seed fixée pour reproductibilité
 
 ## 📌 Évaluation
-- Utilisation de métriques adaptées au problème :
-  - Classification : accuracy, precision, recall, F1-score
-  - Régression : RMSE, MAE, R²
-
-## 📌 Validation
-- Validation croisée si nécessaire
-- Évaluation sur un dataset de test indépendant
+- Classification : accuracy, precision, recall, F1-score
 
 ---
 
-# 💾 4. Gestion des modèles
+# 💾 4. Gestion du modèle
 
-- Sauvegarde des modèles entraînés (pickle / joblib)
-- Versionnage des modèles si nécessaire
-- Séparation entre entraînement et inférence
+- Modèle sauvegardé avec `joblib` ou `pickle`
+- Chargé au démarrage de l’API FastAPI
+- Séparation stricte entre entraînement et inférence
 
 ---
 
 # 🔁 5. Reproductibilité
 
-- Version Python fixée (ex: 3.10)
-- Gestion des dépendances via `requirements.txt`
-- Environnement isolé (virtualenv / uv / poetry)
-- Seeds fixées pour les expériences
+- Python version 3.11
+- Dépendances dans `requirements.txt`
+- Environnement isolé (venv ou Docker)
+- Seeds fixées pour stabilité des résultats
 
 ---
 
 # 🧪 6. Tests
 
-- Utilisation de Pytest
-- Tests dans le dossier `tests/`
-- Fichiers nommés `test_*.py`
-- Exécution automatique via CI/CD
+- Tests avec Pytest
+- Dossier `tests/`
+- Fichiers `test_*.py`
+- Exécution automatisée via CI/CD
 
 ---
 
-# 🚀 7. CI/CD
+# 🚀 7. CI/CD & Déploiement
 
-- Pipeline automatisé via GitHub Actions
+## CI (GitHub Actions)
 - Installation des dépendances
-- Exécution des tests à chaque push / pull request
-- Validation avant fusion des branches
+- Exécution des tests à chaque push
+- Validation automatique du code
+
+## CD (Hugging Face Spaces)
+- Déploiement automatique via push sur `main`
+- Mise à jour automatique de l’API
 
 ---
 
 # 📌 Objectif
 
-Ces standards garantissent :
-- un code propre et maintenable
-- des expérimentations reproductibles
-- une collaboration efficace
-- une mise en production fiable
+Ce projet garantit :
+- un code propre et structuré
+- une API stable et reproductible
+- un workflow CI/CD automatisé
+- un déploiement fiable en production
