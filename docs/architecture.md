@@ -32,6 +32,13 @@ L’architecture repose sur un système complet intégrant :
 
 ---
 
+### 🗄️ Base de données PostgreSQL
+- Stocke les inputs du modèle
+- Stocke les prédictions générées
+- Permet le suivi des décisions ML
+
+---
+
 ### 🐳 Docker
 - Conteneurisation de l’application
 - Environnement reproductible
@@ -48,13 +55,16 @@ L’architecture repose sur un système complet intégrant :
 
 ## 🔁 Flux de données
 
-```mermaid
-flowchart LR
-    U[Utilisateur] --> API[FastAPI]
+Voici le flux global du système :
 
-    API --> PREP[Prétraitement]
-    PREP --> MODEL[Modèle ML]
-    MODEL --> PRED[Prédiction]
+![Architecture ML Pipeline](images/uml-architecture.jpeg)
 
-    PRED --> DB[(PostgreSQL)]
-    DB --> API
+---
+
+## 🎯 Résumé
+
+- API → reçoit les requêtes
+- ML → génère les prédictions
+- DB → stocke les résultats
+- CI/CD → automatise les déploiements
+- Docker → garantit la reproductibilité

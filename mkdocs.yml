@@ -1,7 +1,16 @@
 site_name: Futurisys - ML API Documentation
 
 theme:
-  name: material
+  name: mkdocs
+  palette:
+    primary: blue
+    accent: blue
 
 nav:
   - Accueil: index.md
+  - Architecture: architecture.md
+  - API: api.md
+  - Modèle: model.md
+  - Déploiement: deployment.md
+  - ML Standards: ml_standards.md
+
