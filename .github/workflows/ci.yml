@@ -23,7 +23,7 @@ jobs:
           python-version: '3.11'
 
       # =====================
-      # Fix PYTHONPATH (IMPORTANT)
+      # Fix PYTHONPATH (IMPORTANTs)
       # =====================
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=." >> $GITHUB_ENV
