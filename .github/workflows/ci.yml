@@ -42,3 +42,27 @@ jobs:
       - name: Run tests with coverage
         run: |
           pytest -v --cov=app --cov-report=term-missing --cov-report=xml
+
+
+# =====================
+# 🚀 DEPLOY MKDOCS (GitHub Pages)
+# =====================
+  deploy-docs:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install MkDocs
+        run: |
+          pip install mkdocs mkdocs-material pymdown-extensions
+
+      - name: Deploy documentation
+        run: mkdocs gh-deploy --force
