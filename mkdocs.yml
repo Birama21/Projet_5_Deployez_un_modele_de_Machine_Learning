@@ -1,1 +1,7 @@
-site_name: My Docs
+site_name: Futurisys - ML API Documentation
+
+theme:
+  name: material
+
+nav:
+  - Accueil: index.md
