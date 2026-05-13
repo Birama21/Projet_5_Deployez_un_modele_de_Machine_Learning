@@ -128,3 +128,32 @@ Garantir un projet :
 - reproductible
 - maintenable
 - prêt pour production
+
+## 🔄 Protocole de mise à jour du modèle
+
+Afin de garantir la performance du modèle dans le temps, un protocole de mise à jour régulière est mis en place.
+
+### 📅 Fréquence de mise à jour
+- Réentraînement mensuel du modèle
+- Réentraînement déclenché si baisse de performance détectée
+
+### 📊 Surveillance des performances
+- Suivi des métriques (accuracy, precision, recall)
+- Détection de dérive des données (data drift)
+
+### 🔁 Processus de mise à jour
+1. Collecte des nouvelles données
+2. Nettoyage et prétraitement
+3. Réentraînement du modèle
+4. Évaluation des performances
+5. Validation du modèle
+6. Déploiement en production
+
+### 🧪 Validation
+- Comparaison avec le modèle précédent
+- Validation sur un jeu de test indépendant
+
+### 🚀 Déploiement
+- Mise à jour via pipeline CI/CD
+- Versionnement du modèle
+- Possibilité de rollback en cas de problème

@@ -25,14 +25,13 @@ uvicorn app.main:app --reload
 
 ## 🐳 Docker
 
-docker build -t ml-api .  
-docker run -p 7860:7860 ml-api  
+docker compose up --build
 
 ---
 
 ## 🌐 API
 
-Swagger : http://localhost:7860/docs  
+Swagger : http://localhost:8000/docs  
 
 ### POST /predict
 {
